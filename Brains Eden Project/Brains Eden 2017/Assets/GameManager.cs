@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameCanvas;
     public GameObject gameOverCanvas;
 
+    public GameObject[] bats;
+
     // Use this for initialization
     private void Start()
     {
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
 
         gameTimer = 0;
         gameOverTimer = 0;
+        gameOverCanvas.SetActive(false);
 
         for (int i = 0; i < playersReady.Length; i++)
         {
@@ -126,6 +130,52 @@ public class GameManager : MonoBehaviour
     private void UpdateGameOver()
     {
         gameCanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
+
+        bool continueSort = true;
+        while (continueSort)
+        {
+            for (var i = 0; i < 4; i++)
+            {
+                for (var j = i + 1; j < 4; j++)
+                {
+                    if (bats[i].GetComponent<EnergyContainer>().energy < bats[j].GetComponent<EnergyContainer>().energy)
+                    {
+                        continueSort = true;
+                        GameObject leftMost = bats[i];
+
+                        bats[i] = bats[j];
+                        bats[j] = leftMost;
+                    }
+                    else continueSort = false;
+                }
+            }
+        }
+
+        foreach (Transform child in gameOverCanvas.transform)
+        {
+            switch (child.gameObject.name)
+            {
+                case "1":
+                    child.gameObject.GetComponent<Text>().text = bats[0].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    bats[0].name;
+                    break;
+                case "2":
+                    child.gameObject.GetComponent<Text>().text = bats[1].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    bats[1].name;
+                    break;
+                case "3":
+                    child.gameObject.GetComponent<Text>().text = bats[2].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    bats[2].name;
+                    break;
+                case "4":
+                    child.gameObject.GetComponent<Text>().text = bats[3].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    bats[3].name;
+                    break;
+                default:
+                    break;
+            }
+        }
         gameOverTimer += Time.deltaTime;
         if (gameOverTimer >= gameOverTime)
         {
