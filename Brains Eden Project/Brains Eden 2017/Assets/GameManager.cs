@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] Players;
     public Transform[] PlayersStartingPoints;
-    protected bool[] playersReady;
+    public bool[] playersReady;
 
     public int maxPlayers;
 
@@ -33,10 +33,12 @@ public class GameManager : MonoBehaviour
     public float gameOverTime;
     private float gameOverTimer;
 
-    public GameObject gameCanvas;
+    public GameObject playerSelectionCanvas;
     public GameObject gameOverCanvas;
 
     public GameObject[] bats;
+
+    private float selectionTimer;
 
     // Use this for initialization
     private void Start()
@@ -91,7 +93,10 @@ public class GameManager : MonoBehaviour
                     Players[i - 1].transform.position = PlayersStartingPoints[i - 1].position;
                     Players[i - 1].transform.rotation = PlayersStartingPoints[i - 1].rotation;
                     Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
-                    UI.containers[i - 1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
+                    UI.containers[i] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
+                    Players[i - 1].GetComponent<Movment>().enabled = false;
+                    Players[i-1].GetComponentInChildren<LightningSpawner>().enabled = false;
+                    Players[i - 1].GetComponent<PlayerController>().enabled = false;
                 }
                 else
                 {
@@ -114,6 +119,34 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        
+        if (readyNum == currPlayers && currPlayers >=2)
+        {
+            selectionTimer += Time.deltaTime;
+            if (selectionTimer > 3.0f)
+            {
+                startGame();
+            }
+        }
+        else
+        {
+            selectionTimer = 0.0f;
+        }
+    }
+
+    private void startGame()
+    {
+        state = GameState.Game;
+        playerSelectionCanvas.SetActive(false);
+        for (int i = 0; i < Players.Length; i++)
+        {
+            if (Players[i] != null)
+            {
+                Players[i].GetComponent<Movment>().enabled = true;
+                Players[i].GetComponent<PlayerController>().enabled = true;
+                Players[i].GetComponentInChildren<LightningSpawner>().enabled = true;
+            }
+        }
     }
 
     private void UpdateGame()
@@ -129,7 +162,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateGameOver()
     {
-        gameCanvas.SetActive(false);
+        UI.gameObject.SetActive(false);
         gameOverCanvas.SetActive(true);
 
         bool continueSort = true;
