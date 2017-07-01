@@ -21,7 +21,7 @@ public class EnergyContainer : MonoBehaviour {
 
     }
 
-    public bool changeEnergy(float change)
+    public virtual bool changeEnergy(float change)
     {
         energy += change;
         if (energy <= 0.0f)

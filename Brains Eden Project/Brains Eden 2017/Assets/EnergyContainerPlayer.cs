@@ -24,8 +24,20 @@ public class EnergyContainerPlayer : EnergyContainer {
 
     protected override void Update()
     {
-        base.Update();
-        batteryPack.GetComponent<Renderer>().material.color = new Color(1-(energy/maxEnergy), (energy / maxEnergy), 0);
+        if (alive)
+        {
+            base.Update();
+            batteryPack.GetComponent<Renderer>().material.color = new Color(1 - (energy / maxEnergy), (energy / maxEnergy), 0);
+        }
+    }
+
+    public override bool changeEnergy(float change)
+    {
+        if (alive)
+        {
+            return base.changeEnergy(change);
+        }
+        return false;
     }
 
     protected override void energyFull()
@@ -33,6 +45,9 @@ public class EnergyContainerPlayer : EnergyContainer {
         if (!alive)
             return;
         //Explode
+        GetComponent<Movment>().enabled = false;
+
+        GetComponent<EnergyTransfer>().enabled = false;
         alive = false;
         GameObject part = Instantiate(sparksParticle);
         Destroy(part, 4.0f);
@@ -42,6 +57,11 @@ public class EnergyContainerPlayer : EnergyContainer {
 
     protected override void energyEmpty()
     {
+        if (!alive)
+            return;
+        GetComponent<Movment>().enabled = false;
+
+        GetComponent<EnergyTransfer>().enabled = false;
         //Stop Functioning
         alive = false;
         StartCoroutine(powerdownAnimation());

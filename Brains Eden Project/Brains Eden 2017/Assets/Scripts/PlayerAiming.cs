@@ -18,7 +18,7 @@ public class PlayerAiming : MonoBehaviour
     public int m_layerId;
     private int m_layerMask;
 
-    private float m_bezierTime;
+    public float m_bezierTime;
     private int PlayerNum;
 
     [SerializeField]
@@ -51,7 +51,7 @@ public class PlayerAiming : MonoBehaviour
         {
             m_currParticle = (GameObject)Instantiate(m_particle[PlayerNum], m_rayPoint.position, Quaternion.identity);
         }
-        m_bezierTime += (_strength / 20.0f);
+        m_bezierTime += (_strength * Time.deltaTime);
         if (m_bezierTime >= 1)
         {
             m_bezierTime = 0;
@@ -73,6 +73,7 @@ public class PlayerAiming : MonoBehaviour
                 lightning.GetComponent<LightningSpawner>().enabled = true;
                 lightning.GetComponent<LightningSpawner>().endPoint = m_testPlayer.position;
                 lightning.GetComponent<LightningSpawner>().midPoint = t_midPoint;
+                lightning.GetComponent<LightningSpawner>().bezierTimer = m_bezierTime;
                 if (_reverse)
                 {
                     if (m_currParticle)
@@ -137,6 +138,7 @@ public class PlayerAiming : MonoBehaviour
     {
         if (m_currParticle != null)
         {
+            m_bezierTime = 0.0f;
             foreach (Transform Child in m_currParticle.transform)
             {
                 if (Child.gameObject.tag == "DontDie")
