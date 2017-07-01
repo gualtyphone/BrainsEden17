@@ -7,11 +7,15 @@ public class LightningSpawner : MonoBehaviour {
     [SerializeField]
     GameObject LightningPrefab;
 
+    [SerializeField]
+    Material[] LightningMats;
+
     public Vector3 endPoint;
     public Vector3 midPoint;
     public float radius;
     public int segments;
     public Color color;
+    public float bezierTimer;
 
     // Use this for initialization
     void Start () {
@@ -29,6 +33,8 @@ public class LightningSpawner : MonoBehaviour {
             go.GetComponent<Lightning>().radius = radius;
             go.GetComponent<Lightning>().segments = segments;
             go.GetComponent<Lightning>().color = color;
+            go.GetComponent<Lightning>().bezierTimer = bezierTimer;
+            go.GetComponent<Lightning>().lightningMat = LightningMats[GetComponentInParent<PlayerController>().playerNumber-1];
             go.transform.position = transform.position;
             go.GetComponent<Lightning>().ready();
         }
