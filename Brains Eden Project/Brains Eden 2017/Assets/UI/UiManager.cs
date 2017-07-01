@@ -10,19 +10,30 @@ public class UiManager : MonoBehaviour
     public GameManager m_GM;
 
     public EnergyContainer[] containers;
+    public UiBar[] m_UIScript;
 
     public Image[] m_ImageBar;
-    public GameObject[] m_Images;
+    public GameObject[] m_Go;
 
 
     // Use this for initialization
     void Start()
     {
         containers = new EnergyContainer[4];
-        for (int i = 0; i < m_Images.Length; i++)
+        m_UIScript = new UiBar[4];
+
+        for (int i = 0; i < m_ImageBar.Length; i++)
         {
-            m_Images[i].SetActive(false);
+            m_UIScript[i] = m_ImageBar[i].GetComponent<UiBar>();
         }
+
+        for (int i = 0; i < m_Go.Length; i++)
+        {
+            m_Go[i].SetActive(false);
+        }
+
+        
+
     }
 
     // Update is called once per frame
@@ -34,10 +45,8 @@ public class UiManager : MonoBehaviour
             {
                 if (m_GM.Players[i] != null)
                 {
-
-                    m_ImageBar[i].GetComponent<UiBar>().SetHealthBar(m_GM.Players[i].GetComponent<EnergyContainer>().energy,
-                                                                    m_GM.Players[i].GetComponent<EnergyContainer>().maxEnergy);
-                    m_Images[i].SetActive(true);
+                    m_UIScript[i].SetHealthBar(containers[i].energy, containers[i].maxEnergy);
+                    m_Go[i].SetActive(true);
                 }
             }
         }
