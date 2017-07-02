@@ -17,12 +17,15 @@ public class MainMenuController : MonoBehaviour
 
     public float m_fadeSpeed;
 
+    public GameObject m_particle;
+
     // Use this for initialization
     private void Start()
     {
         m_currentButtonId = 0;
         UpdateButtons();
         m_moveTimer = 0f;
+        m_particle.SetActive(false);
     }
 
     private void Update()
@@ -100,14 +103,24 @@ public class MainMenuController : MonoBehaviour
         {
             for (int i = 0; i < m_buttons.Length; i++)
             {
-                m_buttonImages[i].enabled = false;
+                if (m_buttonImages[i].enabled)
+                {
+                    m_buttonImages[i].enabled = false;
+                }
             }
         }
         else
         {
             for (int i = 0; i < m_buttons.Length; i++)
             {
-                m_buttonImages[i].enabled = true;
+                if (!m_buttonImages[i].enabled)
+                {
+                    m_buttonImages[i].enabled = true;
+                }
+            }
+            if (!m_particle.activeSelf)
+            {
+                m_particle.SetActive(true);
             }
         }
     }
