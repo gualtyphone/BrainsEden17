@@ -91,21 +91,22 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), "Joystick" + i + "Button0")))
             {
-                if (Players[i - 1] == null)
+                int j = i-1;
+                if (Players[j] == null)
                 {
-					Players[i - 1] = Instantiate(PlayerPrefab[i-1]);
-                    Players[i - 1].transform.position = PlayersStartingPoints[i - 1].position;
-                    Players[i - 1].transform.rotation = PlayersStartingPoints[i - 1].rotation;
-                    Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
+					Players[j] = Instantiate(PlayerPrefab[j]);
+                    Players[j].transform.position = PlayersStartingPoints[j].position;
+                    Players[j].transform.rotation = PlayersStartingPoints[j].rotation;
+                    Players[j].GetComponent<PlayerController>().playerNumber = i;
                   //  UI.containers[i-1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
-                    Players[i - 1].GetComponent<Movment>().enabled = false;
-                    Players[i - 1].GetComponent<PlayerController>().enabled = false;
-                    Players[i - 1].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = false;
+                    Players[j].GetComponent<Movment>().enabled = false;
+                    Players[j].GetComponent<PlayerController>().enabled = false;
+                    Players[j].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = false;
                 }
                 else
                 {
                     //Set ready
-                    playersReady[i - 1] = !playersReady[i - 1];
+                    playersReady[j] = !playersReady[j];
                 }
             }
         }

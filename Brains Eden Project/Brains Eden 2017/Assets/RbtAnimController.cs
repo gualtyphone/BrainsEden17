@@ -31,7 +31,7 @@ public class RbtAnimController : MonoBehaviour {
 		}
 		else
 		{
-			LeftShoulder.transform.LookAt(LeftShoulder.transform.position + -(transform.up));
+			LeftShoulder.transform.LookAt(LeftShoulder.transform.position + -(transform.up), transform.forward);
 		}
 
 		if (shootingR)
@@ -40,7 +40,7 @@ public class RbtAnimController : MonoBehaviour {
 		}
 		else
 		{
-			RightShoulder.transform.LookAt(RightShoulder.transform.position + -(transform.up));
+			RightShoulder.transform.LookAt(RightShoulder.transform.position + -(transform.up), transform.forward);
 		}
 		/*if (shooting)
 		{

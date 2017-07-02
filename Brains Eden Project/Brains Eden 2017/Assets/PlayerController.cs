@@ -83,11 +83,15 @@ public class PlayerController : MonoBehaviour {
                
                 
                 GetComponents<PlayerAiming>()[Aimer].ActivateBezier(pullTrigger >= pushTrigger, (Mathf.Abs(pushTrigger - pullTrigger)));
+                //GetComponent<RbtAnimController>().shootingL = Aimer == 0;
+                //GetComponent<RbtAnimController>().shootingR = Aimer == 1;
             }
             else
             {
                 GetComponents<PlayerAiming>()[0].destroyParticle();
                 GetComponents<PlayerAiming>()[1].destroyParticle();
+                //GetComponent<RbtAnimController>().shootingL = false;
+                //GetComponent<RbtAnimController>().shootingR = false;
 
             }
         }
@@ -95,6 +99,8 @@ public class PlayerController : MonoBehaviour {
         {
             GetComponents<PlayerAiming>()[0].destroyParticle();
             GetComponents<PlayerAiming>()[1].destroyParticle();
+            //GetComponent<RbtAnimController>().shootingL = false;
+            //GetComponent<RbtAnimController>().shootingR = false;
 
         }
     }
