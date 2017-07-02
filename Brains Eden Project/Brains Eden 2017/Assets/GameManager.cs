@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] bats;
 
     private float selectionTimer;
+    public Text T_timer;
 
     // Use this for initialization
     private void Start()
@@ -128,6 +129,25 @@ public class GameManager : MonoBehaviour
         if (readyNum == currPlayers && currPlayers >=2)
         {
             selectionTimer += Time.deltaTime;
+
+            if (selectionTimer > 0)
+            {
+                T_timer.gameObject.SetActive(true);
+            }
+            if (selectionTimer>0&&selectionTimer<1)
+            {
+                T_timer.text = "3";
+            }
+            else if (selectionTimer > 1 && selectionTimer < 2)
+            {
+                T_timer.text = "2";
+            }
+            else if (selectionTimer > 2 && selectionTimer < 3)
+            {
+                T_timer.text = "1";
+            }
+
+
             if (selectionTimer > 3.0f)
             {
                 startGame();
@@ -136,6 +156,7 @@ public class GameManager : MonoBehaviour
         else
         {
             selectionTimer = 0.0f;
+            T_timer.gameObject.SetActive(false);
         }
     }
 
