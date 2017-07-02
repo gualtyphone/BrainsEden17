@@ -8,9 +8,11 @@ public class EnergyTransfer : MonoBehaviour {
 
     EnergyContainer linkedContainer;
 
+
 	// Use this for initialization
 	protected virtual void Start () {
         linkedContainer = GetComponent<EnergyContainer>();
+
 	}
 	
 	// Update is called once per frame

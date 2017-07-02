@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     public GameObject UICanvas;
     public GameObject[] bats;
 
+	private AudioSource audio;
+
     private float selectionTimer;
     public Text T_timer;
 
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
         gameOverTimer = 0;
         gameOverCanvas.SetActive(false);
         UICanvas.SetActive(false);
+		audio = GetComponent<AudioSource>();
 
         for (int i = 0; i < playersReady.Length; i++)
         {
@@ -162,6 +165,7 @@ public class GameManager : MonoBehaviour
         state = GameState.Game;
         playerSelectionCanvas.SetActive(false);
         UICanvas.SetActive(true);
+		audio.enabled = true;
         for (int i = 0; i < Players.Length; i++)
         {
             if (Players[i] != null)

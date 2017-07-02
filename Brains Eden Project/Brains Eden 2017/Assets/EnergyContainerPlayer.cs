@@ -16,10 +16,14 @@ public class EnergyContainerPlayer : EnergyContainer {
     [SerializeField]
     GameObject explosionParticle;
 
+	public AudioClip m_deathAudio;
+	AudioSource audio;
+
     protected override void Start()
     {
         base.Start();
         playerRenderer = GetComponent<Renderer>();
+		audio = GetComponent<AudioSource>();
     }
 
     protected override void Update()
@@ -51,6 +55,7 @@ public class EnergyContainerPlayer : EnergyContainer {
         alive = false;
         GameObject part = Instantiate(sparksParticle);
         Destroy(part, 4.0f);
+		audio.PlayOneShot (m_deathAudio, 0.8f);
         part.transform.position = transform.position;
         StartCoroutine(explosionAnimation());
     }
@@ -63,6 +68,7 @@ public class EnergyContainerPlayer : EnergyContainer {
         GetComponent<EnergyTransfer>().enabled = false;
         alive = false;
         GameObject part = Instantiate(explosionParticle);
+		audio.PlayOneShot (m_deathAudio, 0.8f);
         Destroy(part, 4.0f);
         part.transform.position = transform.position+=new Vector3(0,4,0);
         //Stop Functioning
