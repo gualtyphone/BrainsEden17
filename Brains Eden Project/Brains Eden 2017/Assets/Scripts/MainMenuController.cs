@@ -15,6 +15,8 @@ public class MainMenuController : MonoBehaviour
     public float m_moveSpeed;
     private float m_moveTimer;
 
+    public float m_fadeSpeed;
+
     // Use this for initialization
     private void Start()
     {
@@ -46,7 +48,6 @@ public class MainMenuController : MonoBehaviour
 
     private void CheckForTextChange()
     {
-        print(m_currentButtonId);
         m_moveTimer += Time.deltaTime;
         if (Input.GetAxis("Vertical") < 0f && m_moveTimer >= m_moveSpeed)
         {
@@ -89,6 +90,24 @@ public class MainMenuController : MonoBehaviour
                 default:
                     Debug.LogError("Invalid ID");
                     break;
+            }
+        }
+    }
+
+    public void HideShowButtons(bool _hide)
+    {
+        if (_hide)
+        {
+            for (int i = 0; i < m_buttons.Length; i++)
+            {
+                m_buttonImages[i].enabled = false;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < m_buttons.Length; i++)
+            {
+                m_buttonImages[i].enabled = true;
             }
         }
     }
