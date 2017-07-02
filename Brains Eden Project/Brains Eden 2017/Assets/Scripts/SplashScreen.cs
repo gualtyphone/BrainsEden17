@@ -8,6 +8,7 @@ public class SplashScreen : MonoBehaviour
     private float m_splashTimer;
 
     public GameObject m_controls;
+    public GameObject m_objectives;
 
     // Use this for initialization
     private void Start()
@@ -22,10 +23,12 @@ public class SplashScreen : MonoBehaviour
         if (m_splashTimer < m_splashTime / 2)
         {
             m_controls.SetActive(true);
+            m_objectives.SetActive(false);
         }
         else
         {
             m_controls.SetActive(false);
+            m_objectives.SetActive(true);
         }
 
         if (m_splashTimer >= m_splashTime)
