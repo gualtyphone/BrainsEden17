@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
                 playerColor = Color.yellow;
                 break;
         }
-        GetComponent<Renderer>().material.color = playerColor;
+        //GetComponent<Renderer>().material.color = playerColor;
 	}
 	
 	// Update is called once per frame

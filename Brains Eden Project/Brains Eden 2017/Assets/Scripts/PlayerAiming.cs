@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
+    [SerializeField]
     private Transform m_rayPoint;
     private Transform m_testPlayer;
 
+    [SerializeField]
     private Collider m_colliderRadius;
     [SerializeField]
     public GameObject[] m_particle;
@@ -22,14 +24,14 @@ public class PlayerAiming : MonoBehaviour
     private int PlayerNum;
 
     [SerializeField]
-    private GameObject lightning;
+    public GameObject lightning;
 
     // Use this for initialization
     private void Start()
     {
-        m_rayPoint = transform.FindChild("RayPoint");
-        m_colliderRadius = transform.FindChild("ColliderRadius").GetComponent<Collider>();
-        transform.FindChild("ColliderRadius").gameObject.layer = m_layerId;
+        //m_rayPoint = transform.FindChild("RayPoint");
+        //m_colliderRadius = transform.FindChild("ColliderRadius").GetComponent<Collider>();
+        m_colliderRadius.gameObject.layer = m_layerId;
         m_layerMask = 1 << 12;
         m_layerMask = ~m_layerMask;
         m_bezierTime = 0;
@@ -150,7 +152,7 @@ public class PlayerAiming : MonoBehaviour
             Destroy(m_currParticle);
             m_currParticle = null;
         }
-        lightning.GetComponent<LightningSpawner>().enabled = false;
+        //lightning.GetComponent<LightningSpawner>().enabled = false;
     }
 
 }

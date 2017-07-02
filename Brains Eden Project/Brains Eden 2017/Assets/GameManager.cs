@@ -95,8 +95,8 @@ public class GameManager : MonoBehaviour
                     Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
                     UI.containers[i-1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
                     Players[i - 1].GetComponent<Movment>().enabled = false;
-                    Players[i-1].GetComponentInChildren<LightningSpawner>().enabled = false;
                     Players[i - 1].GetComponent<PlayerController>().enabled = false;
+                    Players[i - 1].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = false;
                 }
                 else
                 {
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
             {
                 Players[i].GetComponent<Movment>().enabled = true;
                 Players[i].GetComponent<PlayerController>().enabled = true;
-                Players[i].GetComponentInChildren<LightningSpawner>().enabled = true;
+                Players[i].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = true;
             }
         }
     }
@@ -154,9 +154,9 @@ public class GameManager : MonoBehaviour
         state = GameState.GameOver;
         for (int i = 0; i < maxPlayers; i++)
         {
-            Players[i - 1].GetComponent<Movment>().enabled = false;
-            Players[i - 1].GetComponentInChildren<LightningSpawner>().enabled = false;
-            Players[i - 1].GetComponent<PlayerController>().enabled = false;
+            Players[i].GetComponent<Movment>().enabled = false;
+            Players[i].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = false;
+            Players[i].GetComponent<PlayerController>().enabled = false;
         }
 
 

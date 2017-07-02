@@ -7,8 +7,8 @@ public class EnergyContainerPlayer : EnergyContainer {
 
     bool alive = true;
 
-    [SerializeField]
-    protected GameObject batteryPack;
+    //[SerializeField]
+    //protected GameObject batteryPack;
 
     Renderer playerRenderer;
     [SerializeField]
@@ -27,7 +27,7 @@ public class EnergyContainerPlayer : EnergyContainer {
         if (alive)
         {
             base.Update();
-            batteryPack.GetComponent<Renderer>().material.color = new Color(1 - (energy / maxEnergy), (energy / maxEnergy), 0);
+            //batteryPack.GetComponent<Renderer>().material.color = new Color(1 - (energy / maxEnergy), (energy / maxEnergy), 0);
         }
     }
 
