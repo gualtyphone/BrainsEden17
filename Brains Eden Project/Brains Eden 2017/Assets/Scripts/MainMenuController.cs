@@ -67,7 +67,8 @@ public class MainMenuController : MonoBehaviour
         {
             print("move Up");
             m_currentButtonId--;
-            if (m_currentButtonId <= 0)
+            print(m_currentButtonId);
+            if (m_currentButtonId < 0)
             {
                 m_currentButtonId = m_buttons.Length - 1;
             }

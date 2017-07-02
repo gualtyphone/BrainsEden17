@@ -1,5 +1,6 @@
 ﻿Shader "Custom/Outline" {
 	Properties{
+		_Alpha("Alpha", float) = 0
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
 		_OutlineColor("Outline Color", Color) = (0,0,0,1)
