@@ -26,7 +26,7 @@ public class PlayerSelectionManager : MonoBehaviour {
             panels[i].SetActive(GM.Players[i]);
             if (GM.Players[i])
             {
-                readyText[i].text = GM.playersReady[i] ? "Press A when ready" : "READY!";
+                readyText[i].text = GM.playersReady[i] ? "READY!" : "Press A when ready";
             }
         }
     }

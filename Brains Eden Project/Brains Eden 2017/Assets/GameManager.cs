@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
 
         int readyNum = 0;
         int currPlayers = 0;
-        for (int i = 1; i <= Mathf.Min(maxPlayers, Input.GetJoystickNames().Length); i++)
+        for (int i = 0; i < maxPlayers; i++)
         {
             if (Players[i] != null)
             {
