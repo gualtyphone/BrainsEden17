@@ -21,7 +21,7 @@ public class speedo : MonoBehaviour {
                 transform.rotation = Quaternion.Euler(0, 0, newRot2);
                 break;
             case "TL":
-                float newRot3 = -140 + (percent * 0.9f);
+                float newRot3 = -135 + (percent * 0.9f);
                 transform.rotation = Quaternion.Euler(0, 0, newRot3);
                 break;
         }
