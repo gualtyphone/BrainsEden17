@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                     Players[i - 1].transform.position = PlayersStartingPoints[i - 1].position;
                     Players[i - 1].transform.rotation = PlayersStartingPoints[i - 1].rotation;
                     Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
-                    UI.containers[i] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
+                    UI.containers[i-1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
                     Players[i - 1].GetComponent<Movment>().enabled = false;
                     Players[i-1].GetComponentInChildren<LightningSpawner>().enabled = false;
                     Players[i - 1].GetComponent<PlayerController>().enabled = false;
