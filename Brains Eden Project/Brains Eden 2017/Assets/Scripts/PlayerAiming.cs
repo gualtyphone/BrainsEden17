@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
+    [SerializeField]
     private Transform m_rayPoint;
     private Transform m_testPlayer;
 
+    [SerializeField]
     private Collider m_colliderRadius;
     [SerializeField]
     public GameObject[] m_particle;
@@ -22,14 +24,14 @@ public class PlayerAiming : MonoBehaviour
     private int PlayerNum;
 
     [SerializeField]
-    private GameObject lightning;
+    public LightningSpawner lightning;
 
     // Use this for initialization
     private void Start()
     {
-        m_rayPoint = transform.FindChild("RayPoint");
-        m_colliderRadius = transform.FindChild("ColliderRadius").GetComponent<Collider>();
-        transform.FindChild("ColliderRadius").gameObject.layer = m_layerId;
+        //m_rayPoint = transform.FindChild("RayPoint");
+        //m_colliderRadius = transform.FindChild("ColliderRadius").GetComponent<Collider>();
+        m_colliderRadius.gameObject.layer = m_layerId;
         m_layerMask = 1 << 12;
         m_layerMask = ~m_layerMask;
         m_bezierTime = 0;
@@ -70,10 +72,10 @@ public class PlayerAiming : MonoBehaviour
             else
             {
                 Vector3 t_midPoint = t_hit.point; //m_rayPoint.position + (t_dir * m_rayDistance);
-                lightning.GetComponent<LightningSpawner>().enabled = true;
-                lightning.GetComponent<LightningSpawner>().endPoint = m_testPlayer.position;
-                lightning.GetComponent<LightningSpawner>().midPoint = t_midPoint;
-                lightning.GetComponent<LightningSpawner>().bezierTimer = m_bezierTime;
+                lightning .enabled = true;
+                lightning .endPoint = m_testPlayer.position;
+                lightning .midPoint = t_midPoint;
+                lightning .bezierTimer = m_bezierTime;
                 if (_reverse)
                 {
                     if (m_currParticle)
@@ -150,7 +152,7 @@ public class PlayerAiming : MonoBehaviour
             Destroy(m_currParticle);
             m_currParticle = null;
         }
-        lightning.GetComponent<LightningSpawner>().enabled = false;
+        lightning .enabled = false;
     }
 
 }

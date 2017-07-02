@@ -26,9 +26,15 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadSplash()
+    {
+        SceneManager.LoadScene("SplashScreen");
+    }
+
     public void LoadArena1()
     {
-        SceneManager.LoadScene("ArenaTest");
+        //SceneManager.LoadScene("ArenaTest");
+        print("loading arena");
     }
 
     public void ExitGame()
