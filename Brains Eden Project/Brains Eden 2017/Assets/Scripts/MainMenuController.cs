@@ -17,11 +17,16 @@ public class MainMenuController : MonoBehaviour
 
     public float m_fadeSpeed;
 
+	public AudioClip m_aTitleSound;
+
+	AudioSource audio;
+
     public GameObject m_particle;
 
     // Use this for initialization
     private void Start()
     {
+		audio = GetComponent<AudioSource>();
         m_currentButtonId = 0;
         UpdateButtons();
         m_moveTimer = 0f;
@@ -122,6 +127,7 @@ public class MainMenuController : MonoBehaviour
             if (!m_particle.activeSelf)
             {
                 m_particle.SetActive(true);
+				audio.PlayOneShot(m_aTitleSound, 0.8f);
             }
         }
     }
