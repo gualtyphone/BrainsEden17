@@ -80,7 +80,7 @@ public class MainMenuController : MonoBehaviour
             switch (m_currentButtonId)
             {
                 case 0:
-                    SceneLoader.m_sceneLoader.LoadArena1();
+                    SceneLoader.m_sceneLoader.LoadSplash();
                     break;
 
                 case 1:
