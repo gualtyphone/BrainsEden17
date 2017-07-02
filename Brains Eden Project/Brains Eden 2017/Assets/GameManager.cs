@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     public GameObject playerSelectionCanvas;
     public GameObject gameOverCanvas;
     public GameObject UICanvas;
-    public GameObject[] bats;
 
     private float selectionTimer;
     public Text T_timer;
@@ -103,6 +102,7 @@ public class GameManager : MonoBehaviour
                     Players[j].GetComponent<Movment>().enabled = false;
                     Players[j].GetComponent<PlayerController>().enabled = false;
                     Players[j].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = false;
+                    Batteries[j].SetActive(true);
                 }
                 else
                 {
@@ -222,13 +222,13 @@ public class GameManager : MonoBehaviour
             {
                 for (var j = i + 1; j < 4; j++)
                 {
-                    if (bats[i].GetComponent<EnergyContainer>().energy < bats[j].GetComponent<EnergyContainer>().energy)
+                    if (Batteries[i].GetComponent<EnergyContainer>().energy < Batteries[j].GetComponent<EnergyContainer>().energy)
                     {
                         continueSort = true;
-                        GameObject leftMost = bats[i];
+                        GameObject leftMost = Batteries[i];
 
-                        bats[i] = bats[j];
-                        bats[j] = leftMost;
+                        Batteries[i] = Batteries[j];
+                        Batteries[j] = leftMost;
                     }
                     else continueSort = false;
                 }
@@ -240,20 +240,20 @@ public class GameManager : MonoBehaviour
             switch (child.gameObject.name)
             {
                 case "1":
-                    child.gameObject.GetComponent<Text>().text = bats[0].GetComponent<EnergyContainer>().energy.ToString() + " " +
-                    bats[0].name;
+                    child.gameObject.GetComponent<Text>().text = Batteries[0].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    Batteries[0].name;
                     break;
                 case "2":
-                    child.gameObject.GetComponent<Text>().text = bats[1].GetComponent<EnergyContainer>().energy.ToString() + " " +
-                    bats[1].name;
+                    child.gameObject.GetComponent<Text>().text = Batteries[1].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    Batteries[1].name;
                     break;
                 case "3":
-                    child.gameObject.GetComponent<Text>().text = bats[2].GetComponent<EnergyContainer>().energy.ToString() + " " +
-                    bats[2].name;
+                    child.gameObject.GetComponent<Text>().text = Batteries[2].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    Batteries[2].name;
                     break;
                 case "4":
-                    child.gameObject.GetComponent<Text>().text = bats[3].GetComponent<EnergyContainer>().energy.ToString() + " " +
-                    bats[3].name;
+                    child.gameObject.GetComponent<Text>().text = Batteries[3].GetComponent<EnergyContainer>().energy.ToString() + " " +
+                    Batteries[3].name;
                     break;
                 default:
                     break;

@@ -36,7 +36,7 @@ public class CenterPlatformPower : MonoBehaviour {
 
     void changeMode()
     {
-        int result = Random.Range(0, 3);
+        int result = Random.Range(1, 3);
         switch (result)
         {
             case 0:
