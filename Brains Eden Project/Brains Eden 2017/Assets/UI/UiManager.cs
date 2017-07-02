@@ -45,8 +45,12 @@ public class UiManager : MonoBehaviour
             {
                 if (m_GM.Players[i] != null)
                 {
-                    m_UIScript[i].SetHealthBar(containers[i].energy, containers[i].maxEnergy);
-                    m_Go[i].SetActive(true);
+                    if (containers[i] != null)
+                    {
+                        m_UIScript[i].SetHealthBar(containers[i].energy, containers[i].maxEnergy);
+                        m_Go[i].SetActive(true);
+                    }
+                   
                 }
             }
         }

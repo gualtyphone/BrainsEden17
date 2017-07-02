@@ -34,7 +34,7 @@ public class LightningSpawner : MonoBehaviour {
             go.GetComponent<Lightning>().segments = segments;
             go.GetComponent<Lightning>().color = color;
             go.GetComponent<Lightning>().bezierTimer = bezierTimer;
-            //go.GetComponent<Lightning>().lightningMat = LightningMats[GetComponentInParent<PlayerController>().playerNumber-1];
+            go.GetComponent<Lightning>().lightningMat = LightningMats[GetComponentInParent<PlayerController>().playerNumber-1];
             go.transform.position = transform.position;
             go.transform.parent = this.transform;
             go.GetComponent<Lightning>().ready();

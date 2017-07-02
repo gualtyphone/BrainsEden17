@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                     Players[i - 1].transform.position = PlayersStartingPoints[i - 1].position;
                     Players[i - 1].transform.rotation = PlayersStartingPoints[i - 1].rotation;
                     Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
-                    UI.containers[i] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
+                    UI.containers[i-1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
                     Players[i - 1].GetComponent<Movment>().enabled = false;
                     Players[i-1].GetComponentInChildren<LightningSpawner>().enabled = false;
                     Players[i - 1].GetComponent<PlayerController>().enabled = false;
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
 
         int readyNum = 0;
         int currPlayers = 0;
-        for (int i = 1; i <= Mathf.Min(maxPlayers, Input.GetJoystickNames().Length); i++)
+        for (int i = 0; i < maxPlayers; i++)
         {
             if (Players[i] != null)
             {
@@ -149,6 +149,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void endGame()
+    {
+        state = GameState.GameOver;
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            Players[i - 1].GetComponent<Movment>().enabled = false;
+            Players[i - 1].GetComponentInChildren<LightningSpawner>().enabled = false;
+            Players[i - 1].GetComponent<PlayerController>().enabled = false;
+        }
+
+
+    }
+
     private void UpdateGame()
     {
         gameTimer += Time.deltaTime;
@@ -156,7 +169,7 @@ public class GameManager : MonoBehaviour
         {
             //go to next state
             print("time finished");
-            state = GameState.GameOver;
+            endGame();
         }
     }
 
