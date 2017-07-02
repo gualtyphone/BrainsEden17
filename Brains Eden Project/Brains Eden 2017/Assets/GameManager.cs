@@ -15,9 +15,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] PlayerPrefab;
+    [SerializeField]
+    private GameObject[] Batteries;
+
 
     //[SerializeField]
-   // private UiManager UI;
+    // private UiManager UI;
 
     public GameState state = GameState.Selection;
 
@@ -167,6 +170,18 @@ public class GameManager : MonoBehaviour
     private void UpdateGame()
     {
         gameTimer += Time.deltaTime;
+
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            if (Players[i] == null && playersReady[i])
+            {
+                Players[i] = Instantiate(PlayerPrefab[i]);
+                Players[i].transform.position = PlayersStartingPoints[i].position;
+                Players[i].transform.rotation = PlayersStartingPoints[i].rotation;
+                Players[i].GetComponent<PlayerController>().playerNumber = i+1;
+                Batteries[i].GetComponent<EnergyContainer>().changeEnergy(-50.0f);
+            }
+        }
 
         if (gameTimer >= gameTime)
         {
