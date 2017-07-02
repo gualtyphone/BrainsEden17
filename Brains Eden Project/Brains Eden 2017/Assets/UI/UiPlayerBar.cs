@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class UiPlayerBar : MonoBehaviour
 {
-    public EnergyContainer m_Ec;
+    public EnergyContainerPlayer m_Ec;
 
     public UiBar[] m_UiBar;
 
-    public Image[] m_Bar;
+    //public Image[] m_Bar;
 
     void Start()
     {
-        m_Ec = gameObject.GetComponent<EnergyContainer>();
+        m_Ec = gameObject.GetComponent<EnergyContainerPlayer>();
         m_UiBar = gameObject.GetComponentsInChildren<UiBar>();
 
       /*  m_Bar = gameObject.GetComponentsInChildren<Image>();
