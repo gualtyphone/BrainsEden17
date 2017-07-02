@@ -14,7 +14,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject PlayerPrefab;
+    private GameObject[] PlayerPrefab;
 
     //[SerializeField]
    // private UiManager UI;
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             {
                 if (Players[i - 1] == null)
                 {
-                    Players[i - 1] = Instantiate(PlayerPrefab);
+					Players[i - 1] = Instantiate(PlayerPrefab[i-1]);
                     Players[i - 1].transform.position = PlayersStartingPoints[i - 1].position;
                     Players[i - 1].transform.rotation = PlayersStartingPoints[i - 1].rotation;
                     Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
