@@ -149,6 +149,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void endGame()
+    {
+        state = GameState.GameOver;
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            Players[i - 1].GetComponent<Movment>().enabled = false;
+            Players[i - 1].GetComponentInChildren<LightningSpawner>().enabled = false;
+            Players[i - 1].GetComponent<PlayerController>().enabled = false;
+        }
+
+
+    }
+
     private void UpdateGame()
     {
         gameTimer += Time.deltaTime;
@@ -156,7 +169,7 @@ public class GameManager : MonoBehaviour
         {
             //go to next state
             print("time finished");
-            state = GameState.GameOver;
+            endGame();
         }
     }
 
