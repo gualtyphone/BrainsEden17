@@ -60,10 +60,13 @@ public class EnergyContainerPlayer : EnergyContainer {
         if (!alive)
             return;
         GetComponent<Movment>().enabled = false;
-
         GetComponent<EnergyTransfer>().enabled = false;
-        //Stop Functioning
         alive = false;
+        GameObject part = Instantiate(explosionParticle);
+        Destroy(part, 4.0f);
+        part.transform.position = transform.position+=new Vector3(0,4,0);
+        //Stop Functioning
+        
         StartCoroutine(powerdownAnimation());
     }
 
