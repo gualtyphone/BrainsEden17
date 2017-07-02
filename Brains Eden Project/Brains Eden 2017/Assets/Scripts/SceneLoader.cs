@@ -33,7 +33,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadArena1()
     {
-        //SceneManager.LoadScene("ArenaTest");
+        SceneManager.LoadScene("LoucaTest");
         print("loading arena");
     }
 
