@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject PlayerPrefab;
 
-    [SerializeField]
-    private UiManager UI;
+    //[SerializeField]
+   // private UiManager UI;
 
     public GameState state = GameState.Selection;
 
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerSelectionCanvas;
     public GameObject gameOverCanvas;
-
+    public GameObject UICanvas;
     public GameObject[] bats;
 
     private float selectionTimer;
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         gameTimer = 0;
         gameOverTimer = 0;
         gameOverCanvas.SetActive(false);
+        UICanvas.SetActive(false);
 
         for (int i = 0; i < playersReady.Length; i++)
         {
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
                     Players[i - 1].transform.position = PlayersStartingPoints[i - 1].position;
                     Players[i - 1].transform.rotation = PlayersStartingPoints[i - 1].rotation;
                     Players[i - 1].GetComponent<PlayerController>().playerNumber = i;
-                    UI.containers[i-1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
+                  //  UI.containers[i-1] = Players[i - 1].GetComponent<EnergyContainerPlayer>();
                     Players[i - 1].GetComponent<Movment>().enabled = false;
                     Players[i - 1].GetComponent<PlayerController>().enabled = false;
                     Players[i - 1].GetComponent<PlayerAiming>().lightning.GetComponent<LightningSpawner>().enabled = false;
@@ -138,6 +139,7 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.Game;
         playerSelectionCanvas.SetActive(false);
+        UICanvas.SetActive(true);
         for (int i = 0; i < Players.Length; i++)
         {
             if (Players[i] != null)
@@ -165,6 +167,7 @@ public class GameManager : MonoBehaviour
     private void UpdateGame()
     {
         gameTimer += Time.deltaTime;
+
         if (gameTimer >= gameTime)
         {
             //go to next state
@@ -175,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateGameOver()
     {
-        UI.gameObject.SetActive(false);
+        UICanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
 
         bool continueSort = true;

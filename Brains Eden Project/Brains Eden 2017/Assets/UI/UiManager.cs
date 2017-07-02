@@ -6,33 +6,19 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
 
-    [SerializeField]
+    public GameObject[] m_GO;
     public GameManager m_GM;
-
-    public EnergyContainer[] containers;
-    public UiBar[] m_UIScript;
-
-    public Image[] m_ImageBar;
-    public GameObject[] m_Go;
 
 
     // Use this for initialization
     void Start()
     {
-        containers = new EnergyContainer[4];
-        m_UIScript = new UiBar[4];
-
-        for (int i = 0; i < m_ImageBar.Length; i++)
+        for (int i = 0; i < m_GO.Length; i++)
         {
-            m_UIScript[i] = m_ImageBar[i].GetComponent<UiBar>();
+            m_GO[i].SetActive(false);
         }
 
-        for (int i = 0; i < m_Go.Length; i++)
-        {
-            m_Go[i].SetActive(false);
-        }
 
-        
 
     }
 
@@ -45,14 +31,20 @@ public class UiManager : MonoBehaviour
             {
                 if (m_GM.Players[i] != null)
                 {
-                    if (containers[i] != null)
-                    {
-                        m_UIScript[i].SetHealthBar(containers[i].energy, containers[i].maxEnergy);
-                        m_Go[i].SetActive(true);
-                    }
-                   
+                    m_GO[i].SetActive(true);
+                    m_GO[i].GetComponentInChildren<speedo>().setSpedo(m_GM.Players[i].GetComponent<EnergyContainerPlayer>().energy);
                 }
+
+
+
+
+                //set energy for player i
+
+
+
             }
         }
     }
+
+
 }
