@@ -130,10 +130,7 @@ public class GameManager : MonoBehaviour
         {
             selectionTimer += Time.deltaTime;
 
-            if (selectionTimer > 0)
-            {
-                T_timer.gameObject.SetActive(true);
-            }
+           
             if (selectionTimer>0&&selectionTimer<1)
             {
                 T_timer.text = "3";
@@ -156,7 +153,7 @@ public class GameManager : MonoBehaviour
         else
         {
             selectionTimer = 0.0f;
-            T_timer.gameObject.SetActive(false);
+            T_timer.text = "Press A To Join!";
         }
     }
 
@@ -281,5 +278,10 @@ public class GameManager : MonoBehaviour
             print("time finished");
             state = _nextState;
         }
+    }
+
+    public int GetTimeLeft()
+    {
+        return Mathf.RoundToInt(gameTime - gameTimer);
     }
 }
