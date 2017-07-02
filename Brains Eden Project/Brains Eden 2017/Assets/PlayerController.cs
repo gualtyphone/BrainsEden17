@@ -57,12 +57,17 @@ public class PlayerController : MonoBehaviour {
         {
             pullTrigger = Input.GetAxis("LTrigger" + playerNumber);
         }
-
+        int Aimer = 0;
         if (pullTrigger > 0 || pushTrigger > 0)
         {
             RaycastHit tmp;
-            GameObject other = GetComponent<PlayerAiming>().GetTarget(out tmp);
-
+            GameObject other = GetComponents<PlayerAiming>()[0].GetTarget(out tmp);
+            
+            if (other == null)
+            {
+                other = GetComponents<PlayerAiming>()[1].GetTarget(out tmp);
+                Aimer = 1;
+            }
             if (other != null)
             {
                 if (other.transform.parent != null && other.transform.parent.GetComponent<EnergyContainer>() != null)
@@ -77,16 +82,20 @@ public class PlayerController : MonoBehaviour {
                 }
                
                 
-                GetComponent<PlayerAiming>().ActivateBezier(pullTrigger >= pushTrigger, (Mathf.Abs(pushTrigger - pullTrigger)));
+                GetComponents<PlayerAiming>()[Aimer].ActivateBezier(pullTrigger >= pushTrigger, (Mathf.Abs(pushTrigger - pullTrigger)));
             }
             else
             {
-                GetComponent<PlayerAiming>().destroyParticle();
+                GetComponents<PlayerAiming>()[0].destroyParticle();
+                GetComponents<PlayerAiming>()[1].destroyParticle();
+
             }
         }
         else
         {
-            GetComponent<PlayerAiming>().destroyParticle();
+            GetComponents<PlayerAiming>()[0].destroyParticle();
+            GetComponents<PlayerAiming>()[1].destroyParticle();
+
         }
     }
 }

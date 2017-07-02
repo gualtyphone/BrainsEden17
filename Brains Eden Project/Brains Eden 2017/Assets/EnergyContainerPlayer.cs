@@ -71,7 +71,9 @@ public class EnergyContainerPlayer : EnergyContainer {
     {
         yield return new WaitForSeconds(1.0f);
         //Instantiate(explosionParticle);
-        GetComponent<PlayerAiming>().destroyParticle();
+        GetComponents<PlayerAiming>()[0].destroyParticle();
+        GetComponents<PlayerAiming>()[1].destroyParticle();
+
         Destroy(this.gameObject);
         yield return null;
     }
@@ -79,7 +81,9 @@ public class EnergyContainerPlayer : EnergyContainer {
     IEnumerator powerdownAnimation()
     {
         yield return new WaitForSeconds(1.0f);
-        GetComponent<PlayerAiming>().destroyParticle();
+        GetComponents<PlayerAiming>()[0].destroyParticle();
+        GetComponents<PlayerAiming>()[1].destroyParticle();
+
         Destroy(this.gameObject);
         yield return null;
     }
