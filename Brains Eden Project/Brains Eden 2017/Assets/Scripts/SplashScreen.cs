@@ -9,6 +9,7 @@ public class SplashScreen : MonoBehaviour
 
     public GameObject m_controls;
     public GameObject m_objectives;
+    public GameObject m_bat;
 
     // Use this for initialization
     private void Start()
@@ -24,11 +25,13 @@ public class SplashScreen : MonoBehaviour
         {
             m_controls.SetActive(true);
             m_objectives.SetActive(false);
+            m_bat.SetActive(false);
         }
         else
         {
             m_controls.SetActive(false);
             m_objectives.SetActive(true);
+            m_bat.SetActive(true);
         }
 
         if (m_splashTimer >= m_splashTime)
